@@ -1,6 +1,20 @@
 <html>
 <head>
 <?php include "header.php";?>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    	 <div class="container-fluid">
+     		<div class="navbar-header">
+     
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Catalogo</a></li>
+        <li class="active"><a href="#">ABM</a></li>
+        </ul>
+    </div>
+  </div>
+  </div> 
+  </nav>
+	
 
 </head>
 <body>

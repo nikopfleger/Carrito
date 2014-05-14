@@ -32,9 +32,16 @@
 	  	"bJQueryUI": true,
 	  	"bPaginate": true,
 	  	"bLengthChange": false, 
-	  	"iDisplayLength": 7,
-	  }
-			  );
+	  	"iDisplayLength": 4,
+	  	"oSearch": {"sSearch": ""},
+	  	"sPaginationType": "full_numbers",
+	  } );
+	  oTable.$('td').hover( function() {
+	        var iCol = $('td', this.parentNode).index(this) % 5;
+	        $('td:nth-child('+(iCol+1)+')', oTable.$('tr')).addClass( 'highlighted' );
+	    }, function() {
+	        oTable.$('td.highlighted').removeClass('highlighted');
+	    } );
 	});
 
 

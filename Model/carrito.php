@@ -14,16 +14,27 @@ class Carrito{
 		return $this->$value;
 	}
 
+	
 	public function __set($param,$value){
 		$this->$param = $value;
 	}
 	
 	public function agregarArticulo($articulo){
 		array_push($this->listadoArticulos,$articulo);
-		return $this->listadoArticulos;
 	}
 	public function eliminarArticuloByIDCompra($index) {
-		$this->listadoArticulos = array_merge(array_slice($this->listadoArticulos,0,$index),array_slice($this->listadoArticulos,$index+1));
+		//array_splice($this->listadoArticulos,$index,1);
+		//$this->listadoArticulos = array_splice($this->listadoArticulos,$index,1);
+		$i=0;
+		foreach ($this->listadoArticulos as $articuloCarrito) 
+		{
+			if ($articuloCarrito->__get("idCompra") == $index)
+			{
+				array_splice($this->listadoArticulos,$i,1);
+				break;
+			}
+			$i++;
+		}
 		return $this->listadoArticulos;
 	    
 	}

@@ -1,3 +1,76 @@
 @CHARSET "ISO-8859-1";
 
-head {}
+head { padding-top: 70px; }
+body 
+{ 
+	background-color:#BDDEAD; 
+	text-color: green;
+
+}
+
+.navbar {
+	color: green;
+}
+.total {
+	text-align:right;
+}
+
+.formulario {
+  position:fixed;
+  align:center;
+  margin-left:-150px; /* half of width */
+  margin-top:-150px;  /* half of height */
+  top:30%;
+  left:15%;
+  padding:30px;
+	
+}
+
+.catalogo {
+  width: 310px;
+  align:center;
+  position:fixed;	
+  margin-left:-150px; /* half of width */
+  margin-top:-150px;  /* half of height */
+  top:50%;
+  left:30%;
+  text-align:center;
+  border-style:solid;
+  border-width:medium;
+  border-color:green;
+  padding:30px;
+}
+
+.elCarrito {	
+  width:230px;
+
+  font-size:12px;
+}
+
+.bordeCarrito {
+  position:fixed;
+  margin-left:-150px; /* half of width */
+  margin-top:-150px;  /* half of height */
+  top:35%;
+  left:85%;
+  border-style:dotted;
+  border-width:medium;
+  border-color:green;
+	
+}
+
+.agregar {
+	color:green;
+	text-decoration:underline;
+}
+
+.eliminar {
+	color:green;
+	text-decoration:underline;
+}
+
+.pagination {
+		color:green;
+		text-decoration:underline;
+}
+

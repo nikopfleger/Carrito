@@ -23,7 +23,6 @@ include "../Model/carrito.php";
 			echo "Los datos son incorrectos";
 			include "../View/index.php";
 		}
-// 		echo json_encode($potencialUsuario->toJason());
 
 		
 		

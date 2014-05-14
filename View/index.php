@@ -2,7 +2,7 @@
 
 	<head>
 	
-	<?php include "header.php";?>
+	<?php include "header2.php";?>
 	<title>Bienvenido a su carrito</title>
 	
 	</head>
@@ -10,7 +10,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
- //VERIFICA CAMPOS EN BLANCO
+ //VERIFICA CAMPOS EN BLANCO!
 
 			$("#btnConfirmar").click(function(e) {
 				if ( ($("#user").val() == "") && ($("#pass").val() == "") )
@@ -70,7 +70,7 @@
     <input type="password" class="form-control" id="pass" name="contraseña" placeholder="Ingresar clave.">
   </div>
   <br><br>
-  <button type="submit" class="btn btn-primary" id="btnConfirmar">Ingresar</button>
+  <button type="submit" class="btn btn-success" id="btnConfirmar">Ingresar</button>
 </form>
 
 

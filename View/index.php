@@ -2,7 +2,7 @@
 
 	<head>
 	
-	<?php include "header2.php";?>
+	<?php include "header.php";?>
 	<title>Bienvenido a su carrito</title>
 	
 	</head>

@@ -6,7 +6,7 @@ include "../Model/carrito.php";
 		
 		
 		$nombre=$_REQUEST["usuario"];
-		$pass=$_REQUEST["contraseña"];
+		$pass=$_REQUEST["contrasena"];
 		
 		$usuarioDao = new UsuarioDAO();
 

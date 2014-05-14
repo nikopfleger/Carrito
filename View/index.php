@@ -15,7 +15,7 @@
 			$("#btnConfirmar").click(function(e) {
 				if ( ($("#user").val() == "") && ($("#pass").val() == "") )
 				{
-					alert("Ingrese usuario y contraseña");
+					alert("Ingrese usuario y contrasena");
 					return false;
 				}
 				else if ($("#user").val() == "")
@@ -25,7 +25,7 @@
 				}
 				else if ($("#pass").val() == "")
 				{
-					alert("Ingrese contraseña");
+					alert("Ingrese contrasena");
 					return false;
 				}
  //VERIFICA SI EL PASSWORD ES CORRECTO
@@ -51,7 +51,7 @@
 	</script>
 <!-- 	<form action= "../Controllers/LoginController.php">		 -->
 <!-- 		Usuario: <input type= "text" name="usuario" id="user"><br> -->
-<!-- 		Contraseña: <input type= "password" name="contraseña" id="pass"><br> -->
+<!-- 		Contrasena: <input type= "password" name="contrasena" id="pass"><br> -->
 <!-- 	 	<input type="submit" name="Enviar" id="btnConfirmar"> -->
 	 	
 <!-- 	</form> -->
@@ -67,7 +67,7 @@
   <br><br>
   <div class="form-group">
     <label class="sr-only" for="exampleInputPassword2">Password</label>
-    <input type="password" class="form-control" id="pass" name="contraseña" placeholder="Ingresar clave.">
+    <input type="password" class="form-control" id="pass" name="contrasena" placeholder="Ingresar clave.">
   </div>
   <br><br>
   <button type="submit" class="btn btn-success" id="btnConfirmar">Ingresar</button>

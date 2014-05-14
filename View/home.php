@@ -1,6 +1,6 @@
 <html>
 	<head>
-	<title>Página principal</title>
+	<title>Pagina principal</title>
 
 	<?php include "header.php";?>
 	
@@ -27,7 +27,7 @@
 		<table id="Carrito" class="elCarrito table table-hover table-condensed">
 		<thead>
 			<tr>
-			<th>Artículo</th>
+			<th>Artiulo</th>
 			<th>Cantidad</th>
 			<th>Precio</th>
 			<th>Total</th> <!--link-->

@@ -5,7 +5,7 @@ include "../Model/carrito.php";
 	$cantArt = $_REQUEST["cantidad"];
 	$idCompra = $_REQUEST["idCompra"];
 	session_start();
-	$artDAO = new ArticuloDAO();
+	$artDAO = $_SESSION["articuloDAO"];
 	$articuloAEnviar = new ArticuloCarrito(
 			$idArt,
 			$artDAO->getArticuloByID($idArt)->__get("nombre"),

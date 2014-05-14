@@ -70,9 +70,9 @@ class ArticuloDAO{
 		$art5= new Articulo(5,"Cuaderno",10,90);
 		$art6= new Articulo(6,"Chicle",1,500);
 		$art7= new Articulo(7,"Marlboro Box", 30, 1000);
-		$art8= new Articulo(1,"Queso",22,10);
-		$art9= new Articulo(2,"Jamon",10,20);
-		$art10= new Articulo(1,"Lechuga",22,10);
+		$art8= new Articulo(8,"Queso",22,10);
+		$art9= new Articulo(9,"Jamon",10,20);
+		$art10= new Articulo(10,"Lechuga",22,10);
 		$this->articulosXPagina = 3;
 		$this->listadoArticulos= array($art1,$art2,$art3,$art4,$art5,$art6,$art7,$art8,$art9,$art10);
 				

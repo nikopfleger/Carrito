@@ -2,11 +2,11 @@
 include "articulos.php";
 
 class Carrito{
-	private $usuario;
+	//private $usuario;
 	private $listadoArticulos;
 
-	public function __construct($user){
-		$this->usuario = $user->__get("nombre");
+	public function __construct(){
+		//$this->usuario = $user->__get("nombre");
 		$this->listadoArticulos = array();
 	}
 

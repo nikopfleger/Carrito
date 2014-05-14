@@ -5,14 +5,14 @@
 	<?php include "header.php";?>
 	
 
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navBarHome">
     	 <div class="container-fluid">
      		<div class="navbar-header">
      
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Catalogo</a></li>
-        <li><a href="#">ABM</a></li>
+        <li><a href="../Controllers/cargarABMController.php" id="accesoABM">ABM</a></li>
         </ul>
     </div>
   </div>
@@ -21,6 +21,7 @@
 	
 
 </head>
+<body id="bodyHome">
 	<div class="bordeCarrito">
 		<i class="fa fa-shopping-cart"></i> Carrito de <?php echo $nombre;?>
 		<table id="Carrito" class="elCarrito table table-hover table-condensed">
@@ -33,8 +34,18 @@
 		 	</tr>
 		</thead>
 		 <?php 
+// 		 		$idCompra=0;
 		 		$total = 0;
-
+// 		 		foreach($listadoActual as $articulo){
+// 		 			$precioASumar = $articulo->__get("cantidad")*$articulo->__get("precioUnitario");
+// 		 			echo
+// 		 			"<tr><td>".$articulo->__get("nombre"). "</td>".
+// 		 			"<td>".$articulo->__get("cantidad")."</td>".
+// 		 			"<td>".$precioASumar."</td>".
+// 		 			"<td><input type='hidden' name='indexCompra' value='".$idCompra."'><a style='color: black' href='#' class='eliminar'>Eliminar</a></td></tr>";
+// 		 			$idCompra++;
+// 		 			$total += $precioASumar;
+// 	 			}		 	 		
 				echo "<td class='total' colspan='4'>". $total . "</tr>";
 		 ?>
 		 </table>
@@ -98,6 +109,7 @@
 		}
 		var idCompra = 0;
 			$(document).ready(function () {
+				
 				//EVENTOINICIO
 				$("#primeraPagina").on("click",function(e) {
 					e.preventDefault();

@@ -14,9 +14,11 @@ include "../Model/carrito.php";
 		if($usuarioDao->existeUsuario($potencialUsuario)){
 
 			session_start();
-			$_SESSION["carrito"] = new Carrito($potencialUsuario);
+			$_SESSION["carrito"] = new Carrito();
 			$articuloDAO = new ArticuloDAO();
-			$listadoActual = $_SESSION["carrito"]->__get("listadoArticulos");
+			$_SESSION["articuloDAO"] = $articuloDAO;
+			$_SESSION["user"] = $nombre;
+			//$listadoActual = $_SESSION["carrito"]->__get("listadoArticulos");
 			include "../View/home.php";
 		}
 	else {

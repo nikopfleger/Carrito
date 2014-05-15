@@ -108,16 +108,17 @@ class ArticuloDAO{
 	}
 	
 	public function eliminarByID($id) {
-		foreach($this->listadoArticulos as $articulo) {
-			if($articulo->__get("id") == $id)
+		
+		$i=0;
+		foreach ($this->listadoArticulos as $articulo)
+		{
+			if ($articulo->__get("id") == $id)
 			{
-				unset($articulo);
+				array_splice($this->listadoArticulos,$i,1);
 				break;
 			}
-		}
-	
-		$this->listadoArticulos = array_values($this->listadoArticulos);
-	
+			$i++;
+		}		
 	}
 	
 	public function getNextArt() {

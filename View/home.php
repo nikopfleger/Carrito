@@ -67,13 +67,20 @@
 			//SIRVE COMO CANTIDAD DE ARTICULOS
 			for ($i=0; $i < $articuloDAO->__get("articulosXPagina"); $i++)
 			{
-				$articulo = $articuloDAO->getArticulos()[$i];
-				echo "<tr>".
-				 "<td>".$articulo->__get("nombre")."</td>".
-				 "<td>".$articulo->__get("precioUnitario")."</td>".
-				 "<td><a href='#' class='agregar'>Agregar</a>
+				if ($i < count($articuloDAO->getArticulos()))
+				{
+					$articulo = $articuloDAO->getArticulos()[$i];	
+					echo "<tr>".
+							"<td>".$articulo->__get("nombre")."</td>".
+							"<td>".$articulo->__get("precioUnitario")."</td>".
+							"<td><a href='#' class='agregar'>Agregar</a>
 				<input type='hidden' name='id' value='" . $articulo->__get("id") . "'>
-				</td></tr>";				
+				</td></tr>";
+					
+				}
+				else
+					break;
+		
 			}
 			?>
 			</table>

@@ -19,6 +19,7 @@ class ArticuloCarrito extends Articulo {
 				"total" => $nuevoTotal
 		);
 	}
+
 	public function __get($value){
 		return $this->$value;
 	}
@@ -51,6 +52,16 @@ class Articulo{
 		$this->$param = $value;
 	}
 	
+	public function toJson() {
+		return array(
+				"id" => $this->id,
+				"nombre" => $this->nombre,
+				"precio" => $this->precioUnitario,
+				"cantidad" => $this->cantidad
+		);
+	
+	}
+	
 
 	
 }
@@ -78,6 +89,13 @@ class ArticuloDAO{
 				
 	}
 	
+	public function articulosToJson() {
+		$array = array();
+		foreach($this->listadoArticulos as $articulo)
+			array_push($array,$articulo->toJson());			
+		return array_values($array);	
+	}
+	
 	public function getArticulos(){
 		return $this->listadoArticulos;
 	}
@@ -87,6 +105,26 @@ class ArticuloDAO{
 			if($articulo->__get("id") == $id)
 				return $articulo;
 		}
+	}
+	
+	public function eliminarByID($id) {
+		foreach($this->listadoArticulos as $articulo) {
+			if($articulo->__get("id") == $id)
+			{
+				unset($articulo);
+				break;
+			}
+		}
+	
+		$this->listadoArticulos = array_values($this->listadoArticulos);
+	
+	}
+	
+	public function getNextArt() {
+		$array = array();
+		foreach ($this->listadoArticulos as $articulo)
+			array_push($array,$articulo->__get("id"));
+		return max($array) + 1;
 	}
 	
 	public function obtenerArrayArticulos($nroPagina) {

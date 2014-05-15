@@ -24,34 +24,99 @@
 
 <script type="text/javascript">
 
+ var editLink = "<a href='#' class='editar'>Editar</a><br>" ;
+ var deleteLink = "<a href='#' class='eliminar'>Eliminar</a>" ;
+ var row = "";
+
 	$(document).ready(function() {
-	  $("#abmCatalogo").dataTable( {
-	  	  "bSort": true,
+	var oTable= $("#abmCatalogo").dataTable( 
+	{
+
+       //"sAjaxSource": "#### my php file path ####",
+        "bJQueryUI": true,
+        "bLengthChange": false, //false
+        "bPaginate": true,
+        "iDisplayLength": 4,
+         "sPaginationType": "full_numbers",
+        "aoColumns": [
+        { "mData": "id" },
+		{ "mData": "nombre", "sWidth": "40%",  "sClass" : "center" },
+		{ "mData": "precio", "sWidth": "40%",  "sClass" : "center" },
+		{ "mData": "cantidad", "sWidth": "40%",  "sClass" : "center" },
+		{ 
+			"mData": null, "bSortable": false, "sType": "html", "sWidth": "5%", "sClass" : "center", "mRender": function ( data, type, full )
+			 { return editLink + deleteLink; }
+    	}
+	
+        ],
+		
+	  	"bSort": true,
 	  	"bAutoWidth":false,
-	  	"bInfo":false,
-	  	"bJQueryUI": true,
-	  	"bPaginate": true,
-	  	"bLengthChange": false, 
-	  	"iDisplayLength": 4,
+	  	"bInfo":true, //false
 	  	"oSearch": {"sSearch": ""},
-	  	"sPaginationType": "full_numbers",
-	  } );
-	  oTable.$('td').hover( function() {
-	        var iCol = $('td', this.parentNode).index(this) % 5;
-	        $('td:nth-child('+(iCol+1)+')', oTable.$('tr')).addClass( 'highlighted' );
-	    }, function() {
-	        oTable.$('td.highlighted').removeClass('highlighted');
-	    } );
+	  	
+	  	"aoColumnDefs": [
+	  	               { "bSortable": false, "aTargets": [ 4 ] },
+	  	               { "bSearchable": false, "aTargets": [ 4 ]},
+	  	               { "bVisible": false, "aTargets":[ 0 ]}
+	  	     			],
+	  	 "oLanguage": {
+	  	      "oPaginate": {
+	  	        "sPrevious": "Anterior",
+		  	    "sNext": "Siguiente",
+		  	    "sFirst": "Primera",
+		  	    "sLast": "Ultima"
+	  	       },
+	  		"sSearch": "Filtrar:"
+	  	 },
+	  	"aaData": <?php echo $artsTabla;?>
+	 });
+
+
+
+
+
+		 
+	  $("#abmCatalogo").on("click",".editar",function(e) {
+			e.preventDefault();
+			row = oTable.fnGetData( $(this).closest("tr") );
+			$("#nombreArticulo").val(row.nombre);
+			$("#precioArticulo").val(row.precio);
+			$("#cantidad").val(row.cantidad);
+
+
+	  });
+
+	  $("#abmCatalogo").on("click",".eliminar",function(e) {
+			e.preventDefault();
+			row = oTable.fnGetData( $(this).closest("tr") );
+			// $(this).closest("tr") le pasa un array de filas
+			fila = $(this).closest("tr")[0];
+			var articulo = oTable.fnGetData(fila);
+			var rownum = oTable.fnGetPosition(fila);
+			$.post("../Controllers/EliminarDeDAOController.php",{ id: articulo.id })
+			.done(function(result) {
+				oTable.fnDeleteRow( rownum );				
+	  		})
+	  		.fail(function(result) {
+				alert("Error en el servidor");
+				return false;
+			});
+			
+	  });
+
+	  $("#btnNuevo").on("click",function(e) {
+			e.preventDefault();
+			$("#nombreArticulo").val("");
+			$("#precioArticulo").val("");
+			$("#cantidad").val("");
+	  });
+	  
 	});
 
 
-
-
-
-
-		
+	
 </script>
-
 
 <div class="formulario">
 <input type="text" class="form-control" id="nombreArticulo" placeholder="Ingresar articulo."><br>
@@ -65,6 +130,7 @@
 <table id="abmCatalogo" class="tablaABM">
 <thead>
 <tr>
+<th>id</th>
 <th>Nombre</th>
 <th>Precio</th>
 <th>Cantidad</th>
@@ -74,19 +140,20 @@
 <tbody>
 
 
-<?php
-	foreach($articuloDAO->__get("listadoArticulos") as $articulo)
-	{
-		 echo "<tr name='id' value='" . $articulo->__get("id") . "'>".
-		 "<td>".$articulo->__get("nombre")."</td>".
-		 "<td>".$articulo->__get("precioUnitario")."</td>".
-		 "<td>".$articulo->__get("cantidad")."</td>".
-		 "<td><a href='#' class='editar'>Editar</a><br><a href='#' class='eliminar'>Eliminar</a> 
-		 </td></tr>";		
-	}
+ <?php
+// 	foreach($articuloDAO->__get("listadoArticulos") as $articulo)
+// 	{
+// 		 echo "<tr id='" . $articulo->__get("id") . "'>".
+// 		 "<td>".$articulo->__get("nombre")."</td>".
+// 		 "<td>".$articulo->__get("precioUnitario")."</td>".
+// 		 "<td>".$articulo->__get("cantidad")."</td>".
+// 		 "<td><a href='#' class='editar'>Editar</a><br><a href='#' class='eliminar'>Eliminar</a> 
+// 		 </td></tr>";		
+// 	}
 
-?>
+ ?>
 </tbody>
+
 </table>
 </div>
 

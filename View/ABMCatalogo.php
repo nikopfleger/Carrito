@@ -79,19 +79,20 @@
 		 
 	  $("#abmCatalogo").on("click",".editar",function(e) {
 			e.preventDefault();
-			row = oTable.fnGetData( $(this).closest("tr") );
-			$("#nombreArticulo").val(row.nombre);
-			$("#precioArticulo").val(row.precio);
-			$("#cantidad").val(row.cantidad);
+			row = $(this).closest("tr")[0];
+			var fila = oTable.fnGetData( $(this).closest("tr") );
+			$("#nombreArticulo").val(fila.nombre);
+			$("#precioArticulo").val(fila.precio);
+			$("#cantidad").val(fila.cantidad);
+			$("#idArticulo").val(fila.id);
 
 
 	  });
 
 	  $("#abmCatalogo").on("click",".eliminar",function(e) {
 			e.preventDefault();
-			row = oTable.fnGetData( $(this).closest("tr") );
 			// $(this).closest("tr") le pasa un array de filas
-			fila = $(this).closest("tr")[0];
+			var fila = $(this).closest("tr")[0];
 			var articulo = oTable.fnGetData(fila);
 			var rownum = oTable.fnGetPosition(fila);
 			$.post("../Controllers/EliminarDeDAOController.php",{ id: articulo.id })
@@ -110,6 +111,40 @@
 			$("#nombreArticulo").val("");
 			$("#precioArticulo").val("");
 			$("#cantidad").val("");
+			$("#idArticulo").val("");
+	  });
+
+	  $("#btnGuardar").on("click",function(e) {
+			e.preventDefault();
+			if ($("#nombreArticulo").val() == "")
+			{
+				alert("Nombre en blanco por favor completelo");
+				return false;		
+			}
+			else if ($("#precioArticulo").val() == "")
+			{
+				alert("Precio en blanco por favor completelo");
+				return false;		
+			}
+			else if ($("#cantidad").val() == "")
+			{
+				alert("Cantidad en blanco por favor completela");
+				return false;		
+			}
+			$.post("../Controllers/ActualizarDAOController.php",{id:$("#idArticulo").val(),nombre:$("#nombreArticulo").val(),precio:$("#precioArticulo").val(),cantidad:$("#cantidad").val()})
+			.done(function(result) {
+				var result = $.parseJSON(result);
+				if (result.newID)
+					oTable.fnAddData({id:$("#idArticulo").val(),nombre:$("#nombreArticulo").val(),precio:$("#precioArticulo").val(),cantidad:$("#cantidad").val()});
+				else {
+					oTable.fnUpdate({id:$("#idArticulo").val(),nombre:$("#nombreArticulo").val(),precio:$("#precioArticulo").val(),cantidad:$("#cantidad").val()},row);
+				}
+
+			})
+			.fail(function(result) {
+				alert("Error en el servidor");
+				return false;
+			});
 	  });
 	  
 	});
@@ -119,6 +154,7 @@
 </script>
 
 <div class="formulario">
+<input type="hidden" id="idArticulo" value="">
 <input type="text" class="form-control" id="nombreArticulo" placeholder="Ingresar articulo."><br>
 <input type="number" class="form-control"  id="precioArticulo" placeholder="Ingresar precio." min=0><br>
 <input type="number" class="form-control"  id="cantidad" placeholder="Ingresar cantidad." min=0><br>

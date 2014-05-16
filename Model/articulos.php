@@ -52,6 +52,8 @@ class Articulo{
 		$this->$param = $value;
 	}
 	
+
+	
 	public function toJson() {
 		return array(
 				"id" => $this->id,
@@ -94,6 +96,24 @@ class ArticuloDAO{
 		foreach($this->listadoArticulos as $articulo)
 			array_push($array,$articulo->toJson());			
 		return array_values($array);	
+	}
+	
+	public function actualizarDAO($articulo) {
+		if ($articulo->__get("id") == "")
+		{
+			$id = $this->getNextArt();
+			$articulo->__set("id", $id);
+			array_push($this->listadoArticulos,$articulo);
+			return array("id" => $id,"newID" => true);
+		}
+		else 
+		{
+			$this->getArticuloByID($articulo->__get("id"))->__set("nombre",$articulo->__get("nombre"));
+			$this->getArticuloByID($articulo->__get("id"))->__set("precioUnitario",$articulo->__get("precioUnitario")) ;
+			$this->getArticuloByID($articulo->__get("id"))->__set("cantidad",$articulo->__get("cantidad"));
+			return array("id" => $articulo->__get("id"),"newID" => false);			
+		}
+
 	}
 	
 	public function getArticulos(){
